@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var multipolygone = L.polygon(
+[
+[[50.17264, 7.26469],
+[49.27264, 7.26469],
+[49.27264, 6.26469]],
+[[50.37264, 7.26469],
+[51.27264, 7.26469],
+[51.27264, 8.26469]]
+],
+{color: 'black'}).addTo(mymap).bindPopup("Wir sind auf einer Ebene");
+</script>
+</body>
+</html>

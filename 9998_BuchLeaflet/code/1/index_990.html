@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+L.tileLayer.wms("https://maps.dwd.de/geoserver/dwd/wms",
+{
+format: 'image/png',
+transparent: true,
+layers:'dwd:Warngebiete_Kreise'
+}).addTo(mymap);
+L.tileLayer.wms("https://maps.dwd.de/geoserver/dwd/wms",
+{
+transparent: true,
+format: 'image/png',
+layers:'dwd:Warnungen_Gemeinden_vereinigt'
+}).addTo(mymap);
+</script>
+</body>
+</html>

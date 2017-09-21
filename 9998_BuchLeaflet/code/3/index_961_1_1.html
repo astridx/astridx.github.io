@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+<script src="heatmap.js"></script>
+<script src="leaflet-heatmap.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var myData={
+max: 100,
+data: [
+{lat: 51.0934, lon:8.666819, value: 99},
+..
+{lat: 50.088041, lon:7.652033, value: 23},
+{lat: 50.088041, lon:7.652033, value: 23}]
+};
+var baseLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
+var cfg = {
+"radius": .1,
+"maxOpacity": .5,
+"scaleRadius": true,
+"useLocalExtrema": true,
+latField: 'lat',
+lngField: 'lon',
+valueField: 'value'
+};
+var heatmapLayer = new HeatmapOverlay(cfg);
+heatmapLayer.setData(myData);
+var map = new L.Map('mapid', {
+center: new L.LatLng(50.0586, 7.6568),
+zoom: 8,
+layers: [baseLayer, heatmapLayer]
+});
+</script>
+</body>
+</html>

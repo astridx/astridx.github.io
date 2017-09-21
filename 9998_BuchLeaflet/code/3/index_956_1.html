@@ -1,0 +1,63 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;script src="gemeinden.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;button onclick="total()"&gt;Population&lt;/button&gt;
+&lt;button onclick="density()"&gt;Population/Fläche&lt;/button&gt;
+&lt;div style="height: 700px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([49.9555 , 7.591838], 8);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+function color(x) {
+return x &gt; 1000 ? '#990000' :
+x &gt; 750 ? '#d7301f' :
+x &gt; 500 ? '#ef6548' :
+x &gt; 250 ? '#fc8d59' :
+x &gt; 200 ? '#fdbb84' :
+x &gt; 100 ? '#fdd49e' :
+x &gt; 0   ? '#fee8c8' :'#fff7ec';
+}
+function densityColor(x) {
+return x &gt; 500 ? '#990000' :
+x &gt; 400 ? '#d7301f' :
+x &gt; 300 ? '#ef6548' :
+x &gt; 200 ? '#fc8d59' :
+x &gt; 100 ? '#fdbb84' :
+x &gt; 50  ? '#fdd49e' :
+x &gt; 0   ? '#fee8c8' :'#fff7ec';
+}
+function myStyle(feature) {
+return {
+fillColor: color(feature.properties.destatis.population),
+weight: 1,
+opacity: 1,
+color: 'white',
+fillOpacity: 0.85
+};
+}
+function myDensityStyle(feature) {
+return {
+fillColor: densityColor(feature.properties.destatis.population/feature.properties.destatis.area),
+weight: 1,
+opacity: 1,
+color: 'white',
+fillOpacity: 0.85
+};
+}
+function total(){
+var geoJsonLayer = L.geoJson(ct, {style: myStyle}).addTo(mymap);
+removeLayer(densitylayer);
+}
+function density(){
+var densitylayer=L.geoJson(ct, {style: myDensityStyle}).addTo(mymap);
+removeLayer(geoJsonLayer);
+}
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

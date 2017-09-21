@@ -1,0 +1,30 @@
+&lt;!DOCTYPE HTML>
+&gt;html lang="de">
+&gt;head>
+&gt;meta charset="utf-8"/>
+&gt;title>Eine OSM Karte mit Leaflet&gt;/title>
+&gt;link rel="stylesheet" href="../leaflet/leaflet.css" />
+&gt;script src="../leaflet/leaflet.js">&gt;/script>
+&gt;script src="esri-leaflet.js">&gt;/script>
+&gt;/head>
+&gt;body>
+&gt;div style="height: 700px;" id="mapid">&gt;/div>
+&gt;script>
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.97264, 7.00469], 12);
+//L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+L.esri.basemapLayer('Gray').addTo(mymap);
+var url = "https://geoportal.stadt-koeln.de/arcgis/rest/services/Behindertenparkplaetze/MapServer";
+var dMap = L.esri.dynamicMapLayer({
+url: url,
+opacity : 0.25,
+useCors: false
+}).addTo(mymap);
+dMap.bindPopup(
+function(err, featureCollection, response){
+return featureCollection.features[0].properties.Bezeichnung +
+'&gt;br>Anzahl: ' +
+featureCollection.features[0].properties.Anzahl;
+});
+&gt;/script>
+&gt;/body>
+&gt;/html>

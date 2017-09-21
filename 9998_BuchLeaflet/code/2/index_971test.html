@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+
+var polyline = L.polyline([
+	[50.27264, 7.26469],
+	[51.27264, 7.26469],
+	[51.27264, 6.26469]],
+);
+/*polyline.feature = {};
+polyline.feature.type = "Feature";
+polyline.feature.properties = {};
+polyline.feature.properties["Foo"] = "Bar";*/
+
+
+var line = {"type":"FeatureCollection",
+	"features":[
+		{"type":"Feature",
+			"properties":{"Foo":"Bar"},
+			"geometry":{"type":"LineString","coordinates":[[7.26469,50.27264],[7.26469,51.27264],[6.26469,51.27264]]}
+		}
+	]
+}
+
+
+var myfeatureGroup=L.featureGroup([polyline]);
+
+var asGeoJSON = myfeatureGroup.toGeoJSON();
+
+var geoJsonLayer = L.geoJson().addTo(mymap);
+geoJsonLayer.addData(asGeoJSON).bindPopup("Ich bin mit der Methode .addData() zur Karte hinzugefügt worden. In GeoJson sehe ich so aus:<br> " + JSON.stringify(asGeoJSON));
+
+</script>
+</body>
+</html>

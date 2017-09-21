@@ -1,0 +1,27 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;script src="leaflet-routing-machine.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="leaflet-routing-machine.css" /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="height: 400px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 13);
+console.log(mymap);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var control = L.Routing.control({
+waypoints: [
+L.latLng(50.273543, 7.262993),
+L.latLng(50.281168, 7.276211)
+],
+router: new L.Routing.osrmv1({
+language: 'de',
+}),
+}).addTo(mymap);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

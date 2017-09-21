@@ -1,0 +1,47 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="height: 700px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var geojsonFeatureCollection =
+{
+"type": "FeatureCollection",
+"features":
+[
+{
+"type": "Feature",
+"geometry": {"type": "Point", "coordinates": [6, 50]},
+"properties": {"name": "Dorf 1"}
+},
+{
+"type": "Feature",
+"geometry": {"type": "Point", "coordinates": [7, 50]},
+"properties": {"name": "Dorf 2"}
+},
+{
+"type": "Feature",
+"geometry": {"type": "Point", "coordinates": [7, 51]},
+"properties": {"name": "Dorf 3"}
+}
+]
+};
+var options = {
+draggable: true,
+title: "Ein Dorf in der Nähe von Gering"
+};
+L.geoJson(geojsonFeatureCollection, {
+onEachFeature: function(feature, layer) {
+layer.bindPopup(feature.properties.name);
+}
+}).addTo(mymap);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

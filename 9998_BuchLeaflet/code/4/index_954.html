@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 8);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var LeafIcon = L.Icon.extend({
+options: {
+shadowUrl: 'leaf-shadow.png',
+iconSize:     [38, 95],
+shadowSize:   [50, 64],
+iconAnchor:   [22, 94],
+shadowAnchor: [4, 62],
+popupAnchor:  [-3, -76]
+}
+});
+var greenIcon = new LeafIcon({iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png'});
+var redIcon = new LeafIcon({iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-red.png'});
+var orangeIcon = new LeafIcon({iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-orange.png'});
+L.marker([50.27264, 7.26469], {icon: greenIcon}).addTo(mymap).bindPopup("Ich bin ein grüner Marker.");
+L.marker([50.27264, 6.26469], {icon: redIcon}).addTo(mymap).bindPopup("Ich bin ein roter Marker.");
+L.marker([50.27264, 8.26469], {icon: orangeIcon}).addTo(mymap).bindPopup("Ich bin ein oranger Marker.");
+</script>
+</body>
+</html>

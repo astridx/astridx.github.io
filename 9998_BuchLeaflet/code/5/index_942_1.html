@@ -1,0 +1,22 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;script src="shp.js"&gt;&lt;/script&gt;
+&lt;script src="leaflet.shpfile.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="height: 700px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 6);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var shpfile = new L.Shapefile('vg2500_geo84.zip',
+{style:function(feature){return {color:"black",fillColor:"red",fillOpacity:.75}}}
+);
+shpfile.addTo(mymap);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

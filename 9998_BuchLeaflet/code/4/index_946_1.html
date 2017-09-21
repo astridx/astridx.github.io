@@ -1,0 +1,73 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" /&gt;
+&lt;script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="dvf.css" /&gt;
+&lt;script src="leaflet-dvf.js"&gt;&lt;/script&gt;
+&lt;script src="leaflet-dvf.markers.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="height: 700px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var options = {
+data: {
+'data1': 20,
+'data2': 50,
+'data3': 10,
+'data4': 20
+},
+chartOptions: {
+'data1': {
+fillColor: 'blue',
+minValue: 0,
+maxValue: 50,
+maxHeight: 30,
+displayText: function (value) {
+//return value.toFixed(2);
+return 'Mein Text';
+}
+},
+'data2': {
+fillColor: 'red',
+minValue: 0,
+maxValue: 50,
+maxHeight: 30,
+},
+'data3': {
+fillColor: 'green',
+minValue: 0,
+maxValue: 50,
+maxHeight: 30,
+},
+'data4': {
+fillColor: 'yellow',
+minValue: 0,
+maxValue: 50,
+maxHeight: 30,
+}
+},
+weight: 1,
+color: '#000000',
+radius:30,
+fillOpacity:1
+};
+var bar = new L.BarChartMarker([50.27264, 7.26469], options);
+mymap.addLayer(bar);
+var radial = new L.RadialBarChartMarker([50.27264, 8.26469], options);
+mymap.addLayer(radial);
+var pie= new L.PieChartMarker([50.27264, 6.26469], options);
+mymap.addLayer(pie);
+var cox = new L.CoxcombChartMarker([50.97264, 7.26469], options);
+mymap.addLayer(cox);
+var stack = new L.StackedRegularPolygonMarker([50.97264, 8.26469], options);
+mymap.addLayer(stack);
+var radialmeter= new L.RadialMeterMarker([50.97264, 6.26469], options);
+mymap.addLayer(radialmeter);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

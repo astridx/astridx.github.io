@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var myMarker=L.marker([50.27264, 7.26469]);
+var markerAsGeoJSON = myMarker.toGeoJSON();
+var geoJsonLayer = L.geoJson().addTo(mymap);
+geoJsonLayer.addData(markerAsGeoJSON).bindPopup("Ich bin mit der Methode .addData() zur Karte hinzugefügt worden. In GeoJson sehe ich so aus:<br> " + JSON.stringify(markerAsGeoJSON));
+</script>
+</body>
+</html>

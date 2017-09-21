@@ -1,0 +1,35 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;script src="AnimatedMarker.js"&gt;&lt;/script&gt;
+&lt;script src="bouncemarker.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;button onclick="start()"&gt;Start&lt;/button&gt;
+&lt;div style="height: 700px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+b = new L.Marker([51.68649, 6.94165], {bounceOnAdd: true});
+var line = L.polyline(
+[[50.68510, 7.94136],[50.68576, 6.94149],[51.68649, 6.94165]]),
+animatedMarker = L.animatedMarker(line.getLatLngs(), {
+autoStart: false,
+distance: 2000,
+interval: 10,
+onEnd: function() {
+b.addTo(mymap);
+b.bounce({duration: 100, height: 50});
+mymap.removeLayer(animatedMarker);
+setTimeout('mymap.removeLayer(b)', 900);
+}
+});
+mymap.addLayer(animatedMarker);
+function start(){animatedMarker.start();}
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

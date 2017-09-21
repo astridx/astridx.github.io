@@ -1,0 +1,27 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;script src="esri-leaflet.js"&gt;&lt;/script&gt;
+&lt;script src="esri-leaflet-geocoder.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="height: 700px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var x = location.search;
+var y = x.split("=");
+var temp=y[1];
+var address = decodeURIComponent(temp);
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.97264, 7.00469], 3);
+L.esri.basemapLayer('Gray').addTo(mymap);
+L.esri.Geocoding.geocode().text(address).run(function(err, result, response){
+console.log(result.results[0].latlng);
+L.marker(result.results[0].latlng).addTo(mymap);
+mymap.setView(result[0].latlng,13);
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

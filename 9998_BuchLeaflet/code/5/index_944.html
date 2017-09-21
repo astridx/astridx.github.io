@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+<script src="esri-leaflet-debug.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<select
+style ="position: absolute;top: 10px;right:10px;z-index: 400;"
+id="basemaps"
+onChange="changeBasemap(basemaps)"
+>
+<option value="Topographic">Topographic</option>
+<option value="Streets">Streets</option>
+<option value="NationalGeographic">National Geographic</option>
+<option value="Oceans">Oceans</option>
+<option value="Gray">Gray</option>
+<option value="DarkGray">Dark Gray</option>
+<option value="Imagery">Imagery</option>
+<option value="ShadedRelief">Shaded Relief</option>
+<option value="Terrain">Terrain</option>
+<option value="USATopo">USATopo	</option>
+</select>
+<script>
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 7);
+var layer = L.esri.basemapLayer('Gray').addTo(mymap);
+function changeBasemap(basemaps){
+var basemap = basemaps.value;
+if (layer) {
+mymap.removeLayer(layer);
+}
+layer = L.esri.basemapLayer(basemap);
+mymap.addLayer(layer);
+}
+</script>
+</body>
+</html>

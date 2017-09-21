@@ -1,0 +1,31 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="MarkerCluster.css"/&gt;
+&lt;link rel="stylesheet" href="MarkerCluster.Default.css"/&gt;
+&lt;script src="leaflet.markercluster-src.js"&gt;&lt;/script&gt;
+&lt;script src="points.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="height: 700px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.219264, 7.19469], 13);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var markers = L.markerClusterGroup(
+//{showCoverageOnHover : false}
+);
+for (var i = 0; i &lt; points.length; i++) {
+var a = points[i];
+var title = a[2];
+var marker = L.marker(new L.LatLng(a[0], a[1]), { title: title });
+marker.bindPopup(title);
+markers.addLayer(marker);
+}
+mymap.addLayer(markers);
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

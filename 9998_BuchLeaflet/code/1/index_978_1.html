@@ -1,0 +1,51 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="height: 700px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid', {closePopupOnClick: false}).setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var marker1 = L.marker([50.27264, 7.26469],
+{
+title:"Marker1",
+alt:"Ich bin Marker 1"
+}
+).addTo(mymap);
+var marker2 = L.marker([51.27264, 6.26469],
+{
+title:"Marker2",
+alt:"Ich bin Marker 2"
+}
+).addTo(mymap);
+marker1.bindPopup("&lt;h1&gt;Gering&lt;/h1&gt;&lt;p&gt;Ein kleines &lt;a href='https://de.wikipedia.org/wiki/Dorf'&gt;Dorf&lt;/a&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;auf dem Maifeld&lt;/li&gt;&lt;li&gt;in der Eifel&lt;/li&gt;&lt;li&gt;an der Elz&lt;/li&gt;&lt;/ul&gt;");
+marker2.bindPopup("&lt;h1&gt;Boisheim&lt;/h1&gt;&lt;p&gt;Ein kleines Dorf&lt;/p&gt;&lt;ul&gt;&lt;li&gt;irgendwo&lt;/li&gt;&lt;li&gt;nordwestlich&lt;/li&gt;&lt;li&gt;von Gering&lt;/li&gt;&lt;/ul&gt;");
+// popup offen zeigen
+// marker1.openPopup();
+
+/* nur ein popup gleichzeitig aktiv
+var popup1 = L.popup()
+    .setLatLng([49.27264, 6.26469])
+    .setContent('&lt;p&gt;Hallo Welt&lt;br /&gt;Ich bin ein Popup.&lt;/p&gt;')
+    .openOn(mymap);
+var popup2 = L.popup({keepInView:true})
+    .setLatLng([49.27264, 5.26469])
+    .setContent('&lt;p&gt;Hallo Welt&lt;br /&gt;Ich bin ein anderes Popup.&lt;/p&gt;')
+    .openOn(mymap);
+*/
+/* mehrerer popup
+var popup1 = L.popup()
+    .setLatLng([49.27264, 6.26469])
+    .setContent('&lt;p&gt;Hallo Welt&lt;br /&gt;Ich bin ein Popup.&lt;/p&gt;')
+    .addTo(mymap);
+var popup2 = L.popup({keepInView:true})
+    .setLatLng([49.27264, 5.26469])
+    .setContent('&lt;p&gt;Hallo Welt&lt;br /&gt;Ich bin ein anderes Popup.&lt;/p&gt;')
+    .addTo(mymap);*/
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+<script src="gemeinden.js"></script>
+</head>
+<body>
+<button onclick="total()">Population</button>
+<button onclick="density()">Population/Fläche</button>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([49.9555 , 7.591838], 8);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+function color(x) {
+return x > 1000 ? '#990000' :
+x > 750 ? '#d7301f' :
+x > 500 ? '#ef6548' :
+x > 250 ? '#fc8d59' :
+x > 200 ? '#fdbb84' :
+x > 100 ? '#fdd49e' :
+x > 0   ? '#fee8c8' :'#fff7ec';
+}
+function densityColor(x) {
+return x > 500 ? '#990000' :
+x > 400 ? '#d7301f' :
+x > 300 ? '#ef6548' :
+x > 200 ? '#fc8d59' :
+x > 100 ? '#fdbb84' :
+x > 50  ? '#fdd49e' :
+x > 0   ? '#fee8c8' :'#fff7ec';
+}
+function myStyle(feature) {
+return {
+fillColor: color(feature.properties.destatis.population),
+weight: 1,
+opacity: 1,
+color: 'white',
+fillOpacity: 0.85
+};
+}
+function myDensityStyle(feature) {
+return {
+fillColor: densityColor(feature.properties.destatis.population/feature.properties.destatis.area),
+weight: 1,
+opacity: 1,
+color: 'white',
+fillOpacity: 0.85
+};
+}
+function total(){
+var geoJsonLayer = L.geoJson(ct, {style: myStyle}).addTo(mymap);
+removeLayer(densitylayer);
+}
+function density(){
+var densitylayer=L.geoJson(ct, {style: myDensityStyle}).addTo(mymap);
+removeLayer(geoJsonLayer);
+}
+</script>
+</body>
+</html>

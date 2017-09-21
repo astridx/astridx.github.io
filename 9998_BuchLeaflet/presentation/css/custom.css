@@ -1,0 +1,28 @@
+.reveal td {
+	vertical-align: middle!important;
+	max-width: 50vh;
+}
+.reveal td iframe{
+	width: 100%;
+	min-height:  400px;
+}
+.reveal td pre{
+	width: 100%;
+	font-size: 15px;
+}
+
+table{
+	width:100%;
+}
+#koenigstein {
+  height: 500px;
+  width: 700px;
+}
+#kachelanzahl{
+	font-size: 16px;
+	margin-left:4%;
+	margin-right: 4%;
+}
+#display932{
+	
+}

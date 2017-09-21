@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var geojsonFeatureCollection =
+{
+"type": "FeatureCollection",
+"features":
+[
+{
+"type": "Feature",
+"geometry": {"type": "Point", "coordinates": [6, 50]},
+"properties": {"name": "Dorf 1"}
+},
+{
+"type": "Feature",
+"geometry": {"type": "Point", "coordinates": [7, 50]},
+"properties": {"name": "Dorf 2"}
+},
+{
+"type": "Feature",
+"geometry": {"type": "Point", "coordinates": [7, 51]},
+"properties": {"name": "Dorf 3"}
+}
+]
+};
+var options_draggable = {
+draggable: true,
+title: "Ein Ort in der Nähe von Gering"
+};
+var options_notdraggable = {
+draggable: false,
+title: "Ein Ort in der Nähe von Gering"
+};
+L.geoJson(geojsonFeatureCollection, {
+pointToLayer: function(feature, latlng) {
+switch(feature.properties.name)
+{
+case "Dorf 1": return L.marker(latlng, options_draggable).bindPopup(feature.properties.name);
+case "Dorf 2": return L.marker(latlng, options_notdraggable).bindPopup(feature.properties.name);
+case "Dorf 3": return L.marker(latlng, options_notdraggable).bindPopup(feature.properties.name);
+}
+}
+}).addTo(mymap);
+</script>
+</body>
+</html>

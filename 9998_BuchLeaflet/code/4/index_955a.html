@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 18);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var greenIcon = L.icon({
+iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+iconSize:     [38, 95],
+shadowSize:   [50, 64],
+iconAnchor:   [22, 94],
+shadowAnchor: [4, 62],
+popupAnchor:  [-3, -76]
+});
+var marker = L.marker([50.27264, 7.26469], {opacity: 0.7, zIndexOffset: 5, icon: greenIcon}).addTo(mymap).bindPopup("Ich bin ein Marker mit einem individuellen Image.");
+
+var pixel_marker = mymap.options.crs.latLngToPoint(L.latLng(50.27264, 7.26469), 18)
+var latlong_marker = mymap.options.crs.pointToLatLng(pixel_marker, 17);
+
+var pixel_iconAnchor_x = pixel_marker.x - 22;
+var pixel_iconAnchor_y = pixel_marker.y - 94;
+var pixel_iconAnchor = { x: pixel_iconAnchor_x, y: pixel_iconAnchor_y }
+var latlong_iconAnchor = mymap.options.crs.pointToLatLng(pixel_iconAnchor, 18);
+
+var pixel_shadowAnchor_x = pixel_marker.x - 4;
+var pixel_shadowAnchor_y = pixel_marker.y - 62;
+var pixel_shadowAnchor = { x: pixel_shadowAnchor_x, y: pixel_shadowAnchor_y }
+var latlong_shadowAnchor = mymap.options.crs.pointToLatLng(pixel_shadowAnchor, 18);
+
+var pixel_popupAnchor_x = pixel_marker.x - 3;
+var pixel_popupAnchor_y = pixel_marker.y - 76;
+var pixel_popupAnchor = { x: pixel_popupAnchor_x, y: pixel_popupAnchor_y }
+var latlong_popupAnchor = mymap.options.crs.pointToLatLng(pixel_popupAnchor, 18);
+
+var circle = L.circle([50.27264, 7.26469], {color: 'red', radius: 3}).addTo(mymap);
+var circleicon = L.circle(latlong_iconAnchor, {radius: 3}).addTo(mymap);
+var circleshadow = L.circle(latlong_shadowAnchor, {color: 'black', radius: 3}).addTo(mymap);
+var circlepopup = L.circle(latlong_popupAnchor, {color: 'white', radius: 3}).addTo(mymap);
+
+
+
+
+console.log(pixel_marker);
+console.log(pixel_iconAnchor_y);
+
+
+</script>
+</body>
+</html>
