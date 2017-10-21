@@ -501,12 +501,13 @@
 				<!-- Teil 9 -->
 				<section data-background-color="#f9b431">
 					<section>
-						<h2>Tree JoRobo Functions
+						<h2>Four JoRobo Functions
 						</h2>
 						<ol>
 							<li>vendor/bin/robo map</li>
-							<li>vendor/bin/robo header</li>
+							<li>vendor/bin/robo headers</li>
 							<li>vendor/bin/robo build</li>
+							<li>vendor/bin/robo bump</li>
 						</ol>
 					</section>
 					<section>
@@ -563,6 +564,17 @@
 							Look at your work directory!
 							Here you will find a subfolder called dist and in this
 							is among other things an installable zip file.
+						</p>
+					</section>
+					<section>
+						<h2>vendor/bin/robo bump
+						</h2>
+						<pre><code style="font-size:smaller" data-trim data-noescape>
+							~/workshop$ vendor/bin/robo bump
+							~/workshop$
+						</code></pre>
+						<p>
+							Now the string __DEPLOY_VERSION__ is exchanged in each file with the version number you entered in the file jorobo.ini.
 						</p>
 					</section>
 				</section>
