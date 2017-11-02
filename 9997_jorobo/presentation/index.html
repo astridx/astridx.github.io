@@ -490,11 +490,13 @@
 						</p>
 						<pre><code style="font-size:smaller" data-trim data-noescape>
 							~/workshop$ <mark>cp vendor/joomla-projects/jorobo/jorobo.ini .</mark>
+							~/workshop$ <mark>cp vendor/joomla-projects/jorobo/jorobo.dist.ini ./</mark>
 							~/workshop$ <mark>cp vendor/joomla-projects/jorobo/RoboFile.php .</mark>
 							~/workshop$ ls
-							composer.json  composer.lock jorobo.ini  RoboFile.php source  vendor
+							composer.json  composer.lock jorobo.ini  jorobo.dist.ini  RoboFile.php source  vendor
 							~/workshop$
 						</code></pre>
+						<p>Add <code>jorobo.ini</code> to <code>.gitignore</code></p>
 					</section>
 					<section>
 						<p>Edit jorobo.ini
@@ -655,6 +657,15 @@
 							Look at your work directory!
 							Here you will find a subfolder called dist and in this
 							is among other things an installable zip file.
+						</p>
+					</section>
+					<section>
+						<p>By the way: The command
+							<p>
+								<code>vendor/bin/robo build --dev</code>
+							</p>
+							enables you to start a new development release.
+
 						</p>
 					</section>
 					<section>
