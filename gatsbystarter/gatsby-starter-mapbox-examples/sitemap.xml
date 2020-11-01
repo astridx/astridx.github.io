@@ -6,7 +6,6 @@
 <url> <loc>https://gatsby-starter-mapbox.netlify.com/map-full/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://gatsby-starter-mapbox.netlify.com/map-geojson-simple/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://gatsby-starter-mapbox.netlify.com/map-scale-control/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://gatsby-starter-mapbox.netlify.com/map-show-and-hide-layers copy/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://gatsby-starter-mapbox.netlify.com/map-show-and-hide-layers/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://gatsby-starter-mapbox.netlify.com/map-style-switcher/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://gatsby-starter-mapbox.netlify.com/map-swipe/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
