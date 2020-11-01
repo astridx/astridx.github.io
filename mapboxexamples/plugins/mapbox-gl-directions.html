@@ -19,13 +19,6 @@
             bottom: 0;
             width: 100%;
         }
-
-
-        .eleInfo {
-            position: absolute;
-            background-color: #fff;
-            z-index: 1;
-        }
     </style>
 </head>
 
@@ -38,10 +31,6 @@
     <div id="map"></div>
 
     <script>
-        var lngDisplay = document.getElementById('lng');
-        var latDisplay = document.getElementById('lat');
-        var eleDisplay = document.getElementById('ele');
-
         mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
         new MapboxDirections({
             accessToken: this.accessToken,
@@ -62,8 +51,6 @@
             center: [-4.488582, 36.861330],
             zoom: 15
         });
-        //style: 'mapbox://styles/mapbox/satellite-v9'
-        //style: 'mapbox://styles/mapbox/streets-v11',
 
         var directions = new MapboxDirections({
             accessToken: mapboxgl.accessToken,
