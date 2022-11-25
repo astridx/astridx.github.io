@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Display a map on a webpage</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js'></script>
+    <link href='https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css' rel='stylesheet' />
+</head>
+
+<body>
+    Playfair Display Variable Font_wght
+    <div id='map1' style='width: 800px; height: 400px;'></div>
+    
+    Rubik Marker Hatch Regular
+    <div id='map2' style='width: 800px; height: 400px;'></div>
+
+    PatrickHandRegular
+    <div id='map3' style='width: 800px; height: 400px;'></div>
+    <script>
+        var map1 = new maplibregl.Map({
+            container: 'map1',
+            style: 'PlayfairDisplayVariableFont_wght.json',
+            center: [7, 50],
+            zoom: 12,
+            attributionControl: false
+        });
+        map1.addControl(new maplibregl.AttributionControl({
+            compact: true,
+            customAttribution: "© MapTiler © OpenStreetMap contributors"
+
+        }
+        ), 'top-left');
+        map1.addControl(new maplibregl.NavigationControl());
+
+        var map2 = new maplibregl.Map({
+            container: 'map2',
+            style: 'RubikMarkerHatchRegular.json',
+            center: [7, 50],
+            zoom: 12,
+            attributionControl: false
+        });
+        map2.addControl(new maplibregl.AttributionControl({
+            compact: true,
+            customAttribution: "© MapTiler © OpenStreetMap contributors"
+
+        }
+        ), 'top-left');
+        map2.addControl(new maplibregl.NavigationControl());
+
+        var map3 = new maplibregl.Map({
+            container: 'map3',
+            style: 'PatrickHandRegular.json',
+            center: [7, 50],
+            zoom: 12,
+            attributionControl: false
+        });
+        map3.addControl(new maplibregl.AttributionControl({
+            compact: true,
+            customAttribution: "© MapTiler © OpenStreetMap contributors"
+
+        }
+        ), 'top-left');
+        map3.addControl(new maplibregl.NavigationControl());
+
+
+    </script>
+</body>
+
+</html>
