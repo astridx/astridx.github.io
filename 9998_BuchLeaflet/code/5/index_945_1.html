@@ -1,0 +1,23 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;script src="esri-leaflet-debug.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="height: 700px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 7);
+var gray = L.esri.basemapLayer('Gray').addTo(mymap);
+var graylabels = L.esri.basemapLayer('GrayLabels').addTo(mymap);
+gray.setOpacity(0.5);
+gray.on('load', alertme);
+function alertme(){
+alert("Fertig!");
+}
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

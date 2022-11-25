@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+<script src="esri-leaflet.js"></script>
+</head>
+<body>
+<select id="sicherheitseinrichtungenID">
+    <option value="">Reset</option>
+    <option value="Untertyp='pt_Notrufsaeule'">Notrufsaeule</option>
+    <option value="Untertyp='pt_Feuerwache'">Feuerwache</option>
+    <option value="Untertyp='pt_Rettungspunkt'">Rettungspunkt</option>
+    <option value="Untertyp='pt_Polizeistation'">Polizeistation</option>
+    <option value="Untertyp='pt_Sirene'">Sirene</option>
+    <option value="Untertyp='pt_Rettungswache'">Rettungswache</option>
+</select>
+<div style="height: 700px" id="mapid"></div>
+<script>
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 12);
+L.esri.basemapLayer('Gray').addTo(mymap);
+var url = 'http://services.arcgis.com/OLiydejKCZTGhvWg/arcgis/rest/services/OSM_DE_Sicherheitseinrichtungen/FeatureServer/0	';
+var sicherheitseinrichtungen = document.getElementById('sicherheitseinrichtungenID');
+var sicherheitseinrichtungenLayer  = L.esri.featureLayer({
+url: url
+}).addTo(mymap);
+var popupTemplate = "<h3>Details:</h3>\n\
+Land: {Land}<br>\n\
+Kreis: {Kreis}<br>\n\
+Gemeinde: {Gemeinde}<br>\n\
+Stadt: {Stadt} <br>\n\
+Typ: {Typ}, {Untertyp}";
+sicherheitseinrichtungenLayer.bindPopup(function (layer){
+console.log(layer.feature.properties);
+return L.Util.template(popupTemplate, layer.feature.properties)
+});
+sicherheitseinrichtungen.addEventListener('change', function(){
+sicherheitseinrichtungenLayer.setWhere(sicherheitseinrichtungen.value);
+});
+</script>
+</body>
+</html>

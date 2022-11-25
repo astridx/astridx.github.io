@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<p>Bitte geben Sie eine Koordinte an:</p><br>
+Geographische Breite:<input type="text" id="lat"><br>
+Geographische Länge:<input type="text" id="long"><br>
+Name:<input type="text" id="name"><br>
+<button onclick="save()">Speichern</button>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+function save()
+{
+var p1 = parseFloat(document.getElementById("lat").value);
+var p2 = parseFloat(document.getElementById("long").value);
+L.marker([p1,p2]).bindPopup(document.getElementById("name").value).addTo(mymap);
+}
+</script>
+</body>
+</html>

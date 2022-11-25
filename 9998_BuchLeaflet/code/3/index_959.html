@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+<script src="leaflet-heat.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.1555 , 7.591838], 15);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var points = [];
+var heat = L.heatLayer(points,
+{
+blur: 15,
+maxZoom: 15,
+max: 1.0,
+radius: 25,
+gradient: {0.4: 'blue', 0.65: 'lime', 1: 'red'}
+}).addTo(mymap);
+function addpoint(e){
+heat.addLatLng(e.latlng);
+}
+mymap.on('click', addpoint);
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+<script src="leaflet-routing-machine.js"></script>
+<script src="Control.Geocoder.js"></script>
+<link rel="stylesheet" href="Control.Geocoder.css" />
+<link rel="stylesheet" href="leaflet-routing-machine.css" />
+</head>
+<body>
+<div style="height: 400px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 13);
+console.log(mymap);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var control = L.Routing.control({
+waypoints: [
+L.latLng(50.273543, 7.262993),
+L.latLng(50.281168, 7.276211)
+],
+router: L.Routing.mapbox('pk.eyJ1IjoiYXNlbG5pZ3UiLCJhIjoiVi0zVHJBQSJ9.9fUKqRI4g5v59l9C-tM55w',
+{
+profile: 'mapbox/walking',
+language: 'de'
+}),
+geocoder: L.Control.Geocoder.nominatim({})
+})
+.addTo(mymap);
+//https://www.mapbox.com/api-documentation/#batch-requests
+</script>
+</body>
+</html>

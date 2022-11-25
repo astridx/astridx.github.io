@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-mapbox-example/static/css/main.692dbbf5.chunk.css",
+    "main.js": "/react-mapbox-example/static/js/main.96b2962c.chunk.js",
+    "main.js.map": "/react-mapbox-example/static/js/main.96b2962c.chunk.js.map",
+    "runtime-main.js": "/react-mapbox-example/static/js/runtime-main.e763875b.js",
+    "runtime-main.js.map": "/react-mapbox-example/static/js/runtime-main.e763875b.js.map",
+    "static/js/2.26f74d9a.chunk.js": "/react-mapbox-example/static/js/2.26f74d9a.chunk.js",
+    "static/js/2.26f74d9a.chunk.js.map": "/react-mapbox-example/static/js/2.26f74d9a.chunk.js.map",
+    "index.html": "/react-mapbox-example/index.html",
+    "precache-manifest.6f69bc80f8b1e8aca8c2a6d38e0daf84.js": "/react-mapbox-example/precache-manifest.6f69bc80f8b1e8aca8c2a6d38e0daf84.js",
+    "service-worker.js": "/react-mapbox-example/service-worker.js",
+    "static/css/main.692dbbf5.chunk.css.map": "/react-mapbox-example/static/css/main.692dbbf5.chunk.css.map",
+    "static/js/2.26f74d9a.chunk.js.LICENSE.txt": "/react-mapbox-example/static/js/2.26f74d9a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e763875b.js",
+    "static/js/2.26f74d9a.chunk.js",
+    "static/css/main.692dbbf5.chunk.css",
+    "static/js/main.96b2962c.chunk.js"
+  ]
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+<script src="leaflet-heat.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.1555 , 7.591838], 10);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var points = [];
+var points1 = [
+[50.1555 , 7.591838 ],
+..
+[50.088041 , 7.652033 ],
+[50.088041 , 7.652033 ]
+];
+
+var points2 = [
+[50.0371 , 7.618306 ],
+..
+[50.088041 , 7.652033 ],
+[50.088041 , 7.652033 ]
+];
+var points3 = [
+[50.088 , 7.65159 ],
+..
+[50.088041 , 7.652033 ],
+[50.088041 , 7.652033 ]
+];
+var heat = L.heatLayer(points).addTo(mymap);
+x=1;
+var name='';
+var interval = setInterval(function(){run()},2000);
+function run(){
+mymap.removeLayer(heat);
+name="points"+x.toString();
+heat = L.heatLayer(
+window[name],
+{blur:15,maxZoom:10,radius:25,gradient:{0.4: 'blue', 0.65: 'lime', 1: 'red'}})
+.addTo(mymap);
+if (x == 3)
+{
+x=1;
+}
+else
+{
+x++;
+}
+}
+</script>
+</body>
+</html>

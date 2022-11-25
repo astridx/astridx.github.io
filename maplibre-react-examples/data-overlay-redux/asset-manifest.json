@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/maplibre-react-examples/data-overlay-redux/static/css/main.49e7b23e.chunk.css",
+    "main.js": "/maplibre-react-examples/data-overlay-redux/static/js/main.1d0582fb.chunk.js",
+    "main.js.map": "/maplibre-react-examples/data-overlay-redux/static/js/main.1d0582fb.chunk.js.map",
+    "runtime-main.js": "/maplibre-react-examples/data-overlay-redux/static/js/runtime-main.9e2e28e3.js",
+    "runtime-main.js.map": "/maplibre-react-examples/data-overlay-redux/static/js/runtime-main.9e2e28e3.js.map",
+    "static/css/2.311566be.chunk.css": "/maplibre-react-examples/data-overlay-redux/static/css/2.311566be.chunk.css",
+    "static/js/2.c40569d9.chunk.js": "/maplibre-react-examples/data-overlay-redux/static/js/2.c40569d9.chunk.js",
+    "static/js/2.c40569d9.chunk.js.map": "/maplibre-react-examples/data-overlay-redux/static/js/2.c40569d9.chunk.js.map",
+    "index.html": "/maplibre-react-examples/data-overlay-redux/index.html",
+    "precache-manifest.d5a9da911b2277a29b1a921b649b4358.js": "/maplibre-react-examples/data-overlay-redux/precache-manifest.d5a9da911b2277a29b1a921b649b4358.js",
+    "service-worker.js": "/maplibre-react-examples/data-overlay-redux/service-worker.js",
+    "static/css/2.311566be.chunk.css.map": "/maplibre-react-examples/data-overlay-redux/static/css/2.311566be.chunk.css.map",
+    "static/css/main.49e7b23e.chunk.css.map": "/maplibre-react-examples/data-overlay-redux/static/css/main.49e7b23e.chunk.css.map",
+    "static/js/2.c40569d9.chunk.js.LICENSE.txt": "/maplibre-react-examples/data-overlay-redux/static/js/2.c40569d9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9e2e28e3.js",
+    "static/css/2.311566be.chunk.css",
+    "static/js/2.c40569d9.chunk.js",
+    "static/css/main.49e7b23e.chunk.css",
+    "static/js/main.1d0582fb.chunk.js"
+  ]
+}

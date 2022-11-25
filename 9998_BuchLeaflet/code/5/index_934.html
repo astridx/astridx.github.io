@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+<script src="esri-leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px" id="mapid"></div>
+<script>
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 12);
+L.esri.basemapLayer('Gray').addTo(mymap);
+var url = 'http://services.arcgis.com/OLiydejKCZTGhvWg/arcgis/rest/services/OSM_DE_Sicherheitseinrichtungen/FeatureServer/0	';
+var sicherheitseinrichtungen = document.getElementById('sicherheitseinrichtungenID');
+var sicherheitseinrichtungenLayer  = L.esri.featureLayer({
+url: url,
+pointToLayer: function (geojson, latlng) {
+return L.circleMarker(latlng);
+},
+style:{
+color: '#5B7CBA',
+}
+}).addTo(mymap);
+var popupTemplate = "<h3>Details:</h3>\n\
+Land: {Land}<br>\n\
+Kreis: {Kreis}<br>\n\
+Gemeinde: {Gemeinde}<br>\n\
+Stadt: {Stadt} <br>\n\
+Typ: {Typ}, {Untertyp}";
+sicherheitseinrichtungenLayer.bindPopup(function (layer){
+return L.Util.template(popupTemplate, layer.feature.properties)
+});
+var nearbyIds = [];
+mymap.on('click', function(e){
+sicherheitseinrichtungenLayer.query().nearby(e.latlng, 5000).ids(function(error, ids){
+for (var j = 0; j < nearbyIds.length; j++) {
+sicherheitseinrichtungenLayer.resetStyle(nearbyIds[j]);
+}
+nearbyIds = ids;
+for (var i = 0; i < ids.length; i++) {
+sicherheitseinrichtungenLayer.setFeatureStyle(ids[i], {
+color: '#BA454E',
+});
+}
+});
+});
+</script>
+</body>
+</html>

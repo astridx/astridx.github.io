@@ -1,0 +1,48 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"&gt;
+&lt;link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"&gt;
+&lt;link rel="stylesheet" href="leaflet-beautify-marker-icon.css"&gt;
+&lt;script src="leaflet-beautify-marker-icon.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="height: 700px;" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 8);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+L.marker([50.27264, 7.26469], {
+icon: L.BeautifyIcon.icon(
+{iconSize: [50, 50]}
+),
+draggable: true
+}).addTo(mymap).bindPopup("Ich bin ein beautify Marker");
+options = {
+icon: 'spinner',
+spin: 'true',
+borderColor: '#8A90B4',
+textColor: 'white',
+backgroundColor: '#8A90B4'
+};
+L.marker([50.27264, 6.26469], {
+icon: L.BeautifyIcon.icon(options),
+draggable: true
+}).addTo(mymap).bindPopup("Ich bin ein beautify Marker");
+options = {
+icon: 'plane',
+iconShape: 'marker',
+borderColor: '#8D208B',
+textColor: '#8D208B',
+backgroundColor: 'transparent'
+};
+L.marker([50.27264, 8.26469], {
+icon: L.BeautifyIcon.icon(options),
+draggable: true
+}).addTo(mymap).bindPopup("Ich bin ein beautify Marker");
+&lt;/script&gt;
+&lt;/body&gt;
+</html>

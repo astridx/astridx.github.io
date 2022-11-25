@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([1, 1], 5);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var polygon = L.polygon([
+[
+[1, 1], [1, 10], [10, 10], [10, 1]
+],
+[
+[2, 2], [2, 5], [5, 5], [5, 2]
+],
+[
+[3, 3], [3, 4], [4, 4], [4, 3]
+],
+[
+[9, 9], [11, 9], [11, 11], [9, 11]
+],
+],
+{color: 'red', weight:2, fillColor:'green', fillOpacity:0.5}).addTo(mymap);
+</script>
+</body>
+</html>

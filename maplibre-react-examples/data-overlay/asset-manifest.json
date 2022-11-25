@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/maplibre-react-examples/data-overlay/static/css/main.49e7b23e.chunk.css",
+    "main.js": "/maplibre-react-examples/data-overlay/static/js/main.5824252d.chunk.js",
+    "main.js.map": "/maplibre-react-examples/data-overlay/static/js/main.5824252d.chunk.js.map",
+    "runtime-main.js": "/maplibre-react-examples/data-overlay/static/js/runtime-main.d844b7d6.js",
+    "runtime-main.js.map": "/maplibre-react-examples/data-overlay/static/js/runtime-main.d844b7d6.js.map",
+    "static/css/2.311566be.chunk.css": "/maplibre-react-examples/data-overlay/static/css/2.311566be.chunk.css",
+    "static/js/2.192423b1.chunk.js": "/maplibre-react-examples/data-overlay/static/js/2.192423b1.chunk.js",
+    "static/js/2.192423b1.chunk.js.map": "/maplibre-react-examples/data-overlay/static/js/2.192423b1.chunk.js.map",
+    "index.html": "/maplibre-react-examples/data-overlay/index.html",
+    "precache-manifest.94e91bb332c989782825a4454d3526de.js": "/maplibre-react-examples/data-overlay/precache-manifest.94e91bb332c989782825a4454d3526de.js",
+    "service-worker.js": "/maplibre-react-examples/data-overlay/service-worker.js",
+    "static/css/2.311566be.chunk.css.map": "/maplibre-react-examples/data-overlay/static/css/2.311566be.chunk.css.map",
+    "static/css/main.49e7b23e.chunk.css.map": "/maplibre-react-examples/data-overlay/static/css/main.49e7b23e.chunk.css.map",
+    "static/js/2.192423b1.chunk.js.LICENSE.txt": "/maplibre-react-examples/data-overlay/static/js/2.192423b1.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d844b7d6.js",
+    "static/css/2.311566be.chunk.css",
+    "static/js/2.192423b1.chunk.js",
+    "static/css/main.49e7b23e.chunk.css",
+    "static/js/main.5824252d.chunk.js"
+  ]
+}

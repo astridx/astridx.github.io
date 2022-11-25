@@ -1,0 +1,27 @@
+&lt;!DOCTYPE HTML>
+&gt;html lang="de">
+&gt;head>
+&gt;meta charset="utf-8"/>
+&gt;title>Eine OSM Karte mit Leaflet&gt;/title>
+&gt;link rel="stylesheet" href="../leaflet/leaflet.css" />
+&gt;script src="../leaflet/leaflet.js">&gt;/script>
+&gt;script src="esri-leaflet.js">&gt;/script>
+&gt;link rel="stylesheet" href="esri-leaflet-geocoder.css">
+&gt;script src="esri-leaflet-geocoder.js">&gt;/script>
+&gt;/head>
+&gt;body>
+&gt;div style="height: 700px;" id="mapid">&gt;/div>
+&gt;script>
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.97264, 7.00469], 12);
+L.esri.basemapLayer('Gray').addTo(mymap);
+var searchControl = L.esri.Geocoding.geosearch().addTo(mymap);
+var results = L.layerGroup().addTo(mymap);
+searchControl.on("results", function(data) {
+results.clearLayers();
+for (var i = data.results.length - 1; i >= 0; i--) {
+results.addLayer(L.marker(data.results[i].latlng));
+}
+});
+&gt;/script>
+&gt;/body>
+&gt;/html>

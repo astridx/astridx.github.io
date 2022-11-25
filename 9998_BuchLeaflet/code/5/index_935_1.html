@@ -1,0 +1,44 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;script src="esri-leaflet.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;select id="sicherheitseinrichtungenID"&gt;
+&lt;option value=""&gt;Reset&lt;/option&gt;
+&lt;option value="Untertyp='pt_Notrufsaeule'"&gt;Notrufsaeule&lt;/option&gt;
+&lt;option value="Untertyp='pt_Feuerwache'"&gt;Feuerwache&lt;/option&gt;
+&lt;option value="Untertyp='pt_Rettungspunkt'"&gt;Rettungspunkt&lt;/option&gt;
+&lt;option value="Untertyp='pt_Polizeistation'"&gt;Polizeistation&lt;/option&gt;
+&lt;option value="Untertyp='pt_Sirene'"&gt;Sirene&lt;/option&gt;
+&lt;option value="Untertyp='pt_Rettungswache'"&gt;Rettungswache&lt;/option&gt;
+&lt;/select&gt;
+&lt;div style="height: 700px" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 12);
+L.esri.basemapLayer('Gray').addTo(mymap);
+var url = 'http://services.arcgis.com/OLiydejKCZTGhvWg/arcgis/rest/services/OSM_DE_Sicherheitseinrichtungen/FeatureServer/0	';
+var sicherheitseinrichtungen = document.getElementById('sicherheitseinrichtungenID');
+var sicherheitseinrichtungenLayer  = L.esri.featureLayer({
+url: url
+}).addTo(mymap);
+var popupTemplate = "&lt;h3&gt;Details:&lt;/h3&gt;\n\
+Land: {Land}&lt;br&gt;\n\
+Kreis: {Kreis}&lt;br&gt;\n\
+Gemeinde: {Gemeinde}&lt;br&gt;\n\
+Stadt: {Stadt} &lt;br&gt;\n\
+Typ: {Typ}, {Untertyp}";
+sicherheitseinrichtungenLayer.bindPopup(function (layer){
+console.log(layer.feature.properties);
+return L.Util.template(popupTemplate, layer.feature.properties)
+});
+sicherheitseinrichtungen.addEventListener('change', function(){
+sicherheitseinrichtungenLayer.setWhere(sicherheitseinrichtungen.value);
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

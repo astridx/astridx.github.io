@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var myMarker = L.marker([50.27264, 7.26469],
+{
+title:"Gering",
+alt:"Ein schönes kleines Dorf auf dem Maifeld in der Eifel",
+draggable:true
+}
+).addTo(mymap);
+</script>
+</body>
+</html>

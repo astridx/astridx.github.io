@@ -1,0 +1,51 @@
+&lt;!DOCTYPE HTML&gt;
+&lt;html lang="de"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"/&gt;
+&lt;title&gt;Eine OSM Karte mit Leaflet&lt;/title&gt;
+&lt;link rel="stylesheet" href="../leaflet/leaflet.css" /&gt;
+&lt;script src="../leaflet/leaflet.js"&gt;&lt;/script&gt;
+&lt;script src="esri-leaflet.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style="height: 700px" id="mapid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var mymap = L.map('mapid', {doubleClickZoom:false}).setView([50.27264, 7.26469], 12);
+L.esri.basemapLayer('Gray').addTo(mymap);
+var url = 'http://services.arcgis.com/OLiydejKCZTGhvWg/arcgis/rest/services/OSM_DE_Sicherheitseinrichtungen/FeatureServer/0	';
+var sicherheitseinrichtungen = document.getElementById('sicherheitseinrichtungenID');
+var sicherheitseinrichtungenLayer  = L.esri.featureLayer({
+url: url,
+pointToLayer: function (geojson, latlng) {
+return L.circleMarker(latlng);
+},
+style:{
+color: '#5B7CBA',
+}
+}).addTo(mymap);
+var popupTemplate = "&lt;h3&gt;Details:&lt;/h3&gt;\n\
+Land: {Land}&lt;br&gt;\n\
+Kreis: {Kreis}&lt;br&gt;\n\
+Gemeinde: {Gemeinde}&lt;br&gt;\n\
+Stadt: {Stadt} &lt;br&gt;\n\
+Typ: {Typ}, {Untertyp}";
+sicherheitseinrichtungenLayer.bindPopup(function (layer){
+return L.Util.template(popupTemplate, layer.feature.properties)
+});
+var nearbyIds = [];
+mymap.on('click', function(e){
+sicherheitseinrichtungenLayer.query().nearby(e.latlng, 5000).ids(function(error, ids){
+for (var j = 0; j &lt; nearbyIds.length; j++) {
+sicherheitseinrichtungenLayer.resetStyle(nearbyIds[j]);
+}
+nearbyIds = ids;
+for (var i = 0; i &lt; ids.length; i++) {
+sicherheitseinrichtungenLayer.setFeatureStyle(ids[i], {
+color: '#BA454E',
+});
+}
+});
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="./leaflet/leaflet.css" />
+<script src="./leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 400px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([50.1867836636425, 8.442424856481592], 7);
+
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+
+var greenIcon = L.icon({
+    iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+    shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+
+    iconSize:     [38, 95],
+    shadowSize:   [50, 64],
+    iconAnchor:   [22, 94],
+    shadowAnchor: [4, 62],
+    popupAnchor:  [-3, -76]
+});
+
+L.marker([50.1867836636425, 8.442424856481592], {icon: greenIcon}).addTo(mymap).bindPopup("Ich bin ein Marker mit einem individuelen Image.");
+
+</script>
+</body>
+</html>

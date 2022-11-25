@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/maplibre-react-examples/basic/static/css/main.d98356b6.chunk.css",
+    "main.js": "/maplibre-react-examples/basic/static/js/main.4adc6e9d.chunk.js",
+    "main.js.map": "/maplibre-react-examples/basic/static/js/main.4adc6e9d.chunk.js.map",
+    "runtime-main.js": "/maplibre-react-examples/basic/static/js/runtime-main.abc87dec.js",
+    "runtime-main.js.map": "/maplibre-react-examples/basic/static/js/runtime-main.abc87dec.js.map",
+    "static/css/2.311566be.chunk.css": "/maplibre-react-examples/basic/static/css/2.311566be.chunk.css",
+    "static/js/2.b82e7ce8.chunk.js": "/maplibre-react-examples/basic/static/js/2.b82e7ce8.chunk.js",
+    "static/js/2.b82e7ce8.chunk.js.map": "/maplibre-react-examples/basic/static/js/2.b82e7ce8.chunk.js.map",
+    "index.html": "/maplibre-react-examples/basic/index.html",
+    "precache-manifest.baa8483816d89d2bba69950d78b1156c.js": "/maplibre-react-examples/basic/precache-manifest.baa8483816d89d2bba69950d78b1156c.js",
+    "service-worker.js": "/maplibre-react-examples/basic/service-worker.js",
+    "static/css/2.311566be.chunk.css.map": "/maplibre-react-examples/basic/static/css/2.311566be.chunk.css.map",
+    "static/css/main.d98356b6.chunk.css.map": "/maplibre-react-examples/basic/static/css/main.d98356b6.chunk.css.map",
+    "static/js/2.b82e7ce8.chunk.js.LICENSE.txt": "/maplibre-react-examples/basic/static/js/2.b82e7ce8.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.abc87dec.js",
+    "static/css/2.311566be.chunk.css",
+    "static/js/2.b82e7ce8.chunk.js",
+    "static/css/main.d98356b6.chunk.css",
+    "static/js/main.4adc6e9d.chunk.js"
+  ]
+}

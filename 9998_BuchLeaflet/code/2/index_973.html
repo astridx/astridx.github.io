@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Eine OSM Karte mit Leaflet</title>
+<link rel="stylesheet" href="../leaflet/leaflet.css" />
+<script src="../leaflet/leaflet.js"></script>
+</head>
+<body>
+<div style="height: 700px;" id="mapid"></div>
+<script>
+var mymap = L.map('mapid').setView([50.27264, 7.26469], 7);
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+var geojsonFeature1 = {
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [7.26469, 50.27264]
+},
+"properties": {
+"name": "Gering"
+}
+};
+L.geoJSON(geojsonFeature1).addTo(mymap);
+</script>
+</body>
+</html>
