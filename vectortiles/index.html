@@ -16,8 +16,14 @@
             container: 'map',
             style: 'rlp.json',
             center: [7, 50],
-            zoom: 10
+            zoom: 10,
+            attributionControl: false
         });
+        map.addControl(new maplibregl.AttributionControl({
+            compact: true,
+            customAttribution: "© MapTiler © OpenStreetMap contributors"
+
+        }
         map.addControl(new maplibregl.NavigationControl());
     </script>
 </body>

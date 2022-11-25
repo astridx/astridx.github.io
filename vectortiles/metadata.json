@@ -4,7 +4,7 @@
     "type": "baselayer",
     "format": "pbf",
     "tiles": [
-        "http://localhost/rlp_folder/tileserver-php/rlp/{z}/{x}/{y}.pbf"
+        "https://astridx.github.io/vectortiles/rlp/{z}/{x}/{y}.pbf"
     ],
     "bounds": [
         6.1173599,
