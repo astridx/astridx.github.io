@@ -15,6 +15,10 @@
             max-height: 600px;
             border: 1px solid #ccc;
         }
+
+        path.leaflet-interactive:focus {
+            outline: none;
+        }
     </style>
     <script src="https://streuobstwiesen-boerse.de/marktplatz-bay/maps/leaflet.js"></script>
     <script src="https://streuobstwiesen-boerse.de/marktplatz-bay/maps/Control.FullScreen.js"></script>
@@ -25,81 +29,75 @@
     <h3>Angebote Streuobstwiesenb&ouml;rse</h3>
     <div class="themap" id="themap"></div>
     <script>
-        var landkreise = L.geoJSON(landkreise, {
-            onEachFeature: function (feature, layer) {
-
-                layer.setStyle({
-                    fillColor: '#019137',
+            var landkreise = L.geoJSON(landkreise, {
+                style: {
+                    //fillColor: '#019137',
                     weight: 1,
                     opacity: 1,
-                    color: '#019137',  //Outline color
+                    //color: '#019137',  //Outline color
                     fillOpacity: 0.1
-                });
-                layer.bindTooltip(feature.properties.GEN, {permanent: false, direction:"center"});
-                
-            }
+                },
+                onEachFeature: function (feature, layer) {
+                    layer.bindTooltip(feature.properties.GEN, { permanent: false, direction: "center" });
+                }
+            });
 
-        }
-        );
+            var mapCntLat = 48.648440248527706;
+            var mapCntLng = 9.366900106967782;
+            var mapZoom = 10;
+            var map2Finger = true;
+            var mapSatLayer = true;
+            var mapGeoCoder = false;
+            var mapFullScreen = false;
 
+            var PinIcon = L.Icon.extend({
+                options: {
+                    shadowUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/marker-shadow.png',
+                    iconSize: [24, 41], iconAnchor: [9, 40],
+                    shadowSize: [40, 40], shadowAnchor: [11, 40],
+                    popupAnchor: [3, -39]
+                }
+            });
+            var redIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinRed.png' });
+            var grnIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinGrn.png' });
+            var bluIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinBlu.png' });
+            var yelIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinYel.png' });
+            var vltIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinVlt.png' });
+            var brnIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinBrn.png' });
+            var blkIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinBlk.png' });
 
+            var bDrag = true; if(map2Finger) bDrag = !L.Browser.mobile;
+            var mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZG9tYmVyZy1jb25zdWx0aW5nIiwiYSI6ImNsOWdra2VybDA2ZHMzbm8wbXA5cnlqOXcifQ.ywCki2CGjdl9zO2yT0cGKg';
+            var sat = L.tileLayer(mbUrl, { id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: 'Karten &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, Bilder &copy; <a href="https://www.mapbox.com/maps">Mapbox</a>' });
+            var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: 'Karten &copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: 19 });
+            var map = L.map('themap', { center: [mapCntLat, mapCntLng], zoom: mapZoom, layers: [osm], dragging: bDrag, tap: bDrag, scrollWheelZoom: false });
+            if(mapFullScreen) { var fsControl = L.control.fullscreen({ title: 'Karte im Vollbildmodus anzeigen', titleCancel: 'Vollbildmodus beenden' }); map.addControl(fsControl); }
+        if(mapGeoCoder) { var osmGeocoder = new L.Control.OSMGeocoder({ placeholder: 'Ort oder PLZ suchen...' }); map.addControl(osmGeocoder); }
+        var baseLayers = { 'Karte': osm }; if(mapSatLayer) baseLayers = { 'Karte': osm, 'Satellit': sat };
+            var layerControl = L.control.layers(baseLayers, {}, { collapsed: false }).addTo(map);
 
-        var mapCntLat = 48.648440248527706;
-        var mapCntLng = 9.366900106967782;
-        var mapZoom = 10;
-        var map2Finger = true;
-        var mapSatLayer = true;
-        var mapGeoCoder = false;
-        var mapFullScreen = false;
-
-        var PinIcon = L.Icon.extend({
-            options: {
-                shadowUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/marker-shadow.png',
-                iconSize: [24, 41], iconAnchor: [9, 40],
-                shadowSize: [40, 40], shadowAnchor: [11, 40],
-                popupAnchor: [3, -39]
-            }
-        });
-        var redIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinRed.png' });
-        var grnIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinGrn.png' });
-        var bluIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinBlu.png' });
-        var yelIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinYel.png' });
-        var vltIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinVlt.png' });
-        var brnIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinBrn.png' });
-        var blkIcon = new PinIcon({ iconUrl: 'https://streuobstwiesen-boerse.de/marktplatz-bay/maps/markerPinBlk.png' });
-
-        var bDrag = true; if (map2Finger) bDrag = !L.Browser.mobile;
-        var mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZG9tYmVyZy1jb25zdWx0aW5nIiwiYSI6ImNsOWdra2VybDA2ZHMzbm8wbXA5cnlqOXcifQ.ywCki2CGjdl9zO2yT0cGKg';
-        var sat = L.tileLayer(mbUrl, { id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: 'Karten &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, Bilder &copy; <a href="https://www.mapbox.com/maps">Mapbox</a>' });
-        var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: 'Karten &copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: 19 });
-        var map = L.map('themap', { center: [mapCntLat, mapCntLng], zoom: mapZoom, layers: [osm], dragging: bDrag, tap: bDrag, scrollWheelZoom: false });
-        if (mapFullScreen) { var fsControl = L.control.fullscreen({ title: 'Karte im Vollbildmodus anzeigen', titleCancel: 'Vollbildmodus beenden' }); map.addControl(fsControl); }
-        if (mapGeoCoder) { var osmGeocoder = new L.Control.OSMGeocoder({ placeholder: 'Ort oder PLZ suchen...' }); map.addControl(osmGeocoder); }
-        var baseLayers = { 'Karte': osm }; if (mapSatLayer) baseLayers = { 'Karte': osm, 'Satellit': sat };
-        var layerControl = L.control.layers(baseLayers, {}, { collapsed: false }).addTo(map);
-
-        //#BEGIN_DATA#
-        var mkr9719 = L.marker([48.56479402807606, 9.37065124511719], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9719.bindPopup('Rubrik GELBES BAND Eintrag 97/19<br><br>2 Apfelbäume<br><br>Telefon 07025 0000000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=19">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=19">zum Kontaktformular</a> ]');
-        var mkr9720 = L.marker([48.58478381786833, 9.281044006347658], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9720.bindPopup('Rubrik GELBES BAND Eintrag 97/20<br><br>3 Apfelbäume<br><br>Telefon 00000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=20">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=20">zum Kontaktformular</a> ]');
-        var mkr9721 = L.marker([48.577061426916785, 9.364471435546877], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9721.bindPopup('Rubrik GELBES BAND Eintrag 97/21<br><br>4 Birnbäume und 3 Apfelbäume<br><br>Telefon 00000 000000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=21">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=21">zum Kontaktformular</a> ]');
-        var mkr9722 = L.marker([48.53888641203577, 9.389190673828127], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9722.bindPopup('Rubrik GELBES BAND Eintrag 97/22<br><br>mehrfere Obstbäume<br><br>Telefon 0000000 0000000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=22">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=22">zum Kontaktformular</a> ]');
-        var mkr9723 = L.marker([48.60067914322632, 9.33219909667969], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9723.bindPopup('Rubrik GELBES BAND Eintrag 97/23<br><br>4 Apfelbäume<br><br>Telefon 00000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=23">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=23">zum Kontaktformular</a> ]');
-        var mkr9725 = L.marker([48.7243968, 9.376194], { icon: grnIcon, opacity: 0.75, title: 'OBSTANNAHMESTELLE' }); mkr9725.bindPopup('Rubrik OBSTANNAHMESTELLE Eintrag 97/25<br><br><b>Streuobstmosterei Altbach</b><br />Esslinger Str. 27 | 73776 Altbach<br /><br /><br />Öffnungszeiten: Mo, Mi, Fr 16-19 Uhr<br />Lohnmosterei je nach Kapazitäten<br />Terminvereinbarung während der Öffnungszeiten notwendig!<br />Gepreßt wird Di, Do und Sa.<br><br>Telefon 07153 617294<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=25">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=25">zum Kontaktformular</a> ]');
-        var mkr9726 = L.marker([48.62723588059461, 9.387817382812502], { icon: grnIcon, opacity: 0.75, title: 'OBSTANNAHMESTELLE' }); mkr9726.bindPopup('Rubrik OBSTANNAHMESTELLE Eintrag 97/26<br><br><b>Müller Säfte</b><br />Hauptstr. 4 | 72660 Nürtingen<br /><br />Annahmezeiten MO, MI, FR 17-19 Uhr<br />Bag in Box<br><br>Telefon 07022 99999999<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=26">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=26">zum Kontaktformular</a> ]');
-        var mkr9727 = L.marker([48.57113397558333, 9.381433725357057], { icon: vltIcon, opacity: 0.75, title: 'HOFLADEN' }); mkr9727.bindPopup('Rubrik HOFLADEN Eintrag 97/27<br><br><b>Haldenhof</b><br />Seeweg 66 | 72660 Beuren-Balzholz<br /><br />Rund um die Uhr einkaufen, wer wünscht sich das nicht? Nicht nur wenn der Laden geöffnet ist, sondern wenn Sie möchten. Bei uns ist dies immer möglich! Unser Verkaufsraum auf dem Haldenhof ist stets geöffnet. Nach dem Selbstbedienungsprinzip, können Sie sich selbst Ihre Ware aus dem Regal nehmen, die Eier Ihrer Wahl einpacken oder unsere frische Rohmilch zapfen.<br /><br /><a class=&quot;mpText&quot; target=&quot;_blank&quot; href=&quot;http://www.haldenhof-beuren.de&quot;>Haldenhof</a><br><br>Telefon 07025/83321<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=27">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=27">zum Kontaktformular</a> ]');
-        var mkr9728 = L.marker([48.56774756276, 9.2861938476563], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9728.bindPopup('Rubrik GELBES BAND Eintrag 97/28<br><br>1 Apfelbaum Brettacher<br><br>Telefon 00000000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=28">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=28">zum Kontaktformular</a> ]');
-        var mkr9733 = L.marker([48.55962492731954, 9.433736801147463], { icon: blkIcon, opacity: 0.75, title: 'FLÄCHE' }); mkr9733.bindPopup('Rubrik FLÄCHE Eintrag 97/33<br><br>Wiese mit 23 Bäumen zu verkaufen, 20 ar<br><br>Telefon 071234 5546<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=33">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=33">zum Kontaktformular</a> ]');
-        var mkr9734 = L.marker([48.56894028748692, 9.390392303466799], { icon: blkIcon, opacity: 0.75, title: 'FLÄCHE' }); mkr9734.bindPopup('Rubrik FLÄCHE Eintrag 97/34<br><br>Biete Wiese schön...<br><br>Telefon 000000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=34">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=34">zum Kontaktformular</a> ]');
-        var mkr9710 = L.marker([48.6042558, 9.2553709], { icon: grnIcon, opacity: 0.75, title: 'OBSTANNAHMESTELLE' }); mkr9710.bindPopup('Rubrik OBSTANNAHMESTELLE Eintrag 97/10<br><br>Annahmezeiten ab 20.08.2022: Mo-Fr 9-12 Uhr und 14-18 Uhr, Sa 9-16 Uhr, Ankauf und Tausch gegen Fruchtsäfte<br><br>Telefon 07127 - 35839<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=10">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=10">zum Kontaktformular</a> ]');
-        const yelLGr = L.layerGroup([mkr9719, mkr9720, mkr9721, mkr9722, mkr9723, mkr9728]);
-        const blkLGr = L.layerGroup([mkr9733, mkr9734]);
-        const grnLGr = L.layerGroup([mkr9725, mkr9726, mkr9710]);
-        const vltLGr = L.layerGroup([mkr9727]);
-        layerControl.addOverlay(yelLGr, 'GELBES BAND');
-        layerControl.addOverlay(blkLGr, 'FLÄCHE');
-        layerControl.addOverlay(grnLGr, 'OBSTANNAHMESTELLE');
-        layerControl.addOverlay(vltLGr, 'HOFLADEN');
-        layerControl.addOverlay(landkreise, 'Landkreise');
+            //#BEGIN_DATA#
+            var mkr9719 = L.marker([48.56479402807606, 9.37065124511719], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9719.bindPopup('Rubrik GELBES BAND Eintrag 97/19<br><br>2 Apfelbäume<br><br>Telefon 07025 0000000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=19">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=19">zum Kontaktformular</a> ]');
+            var mkr9720 = L.marker([48.58478381786833, 9.281044006347658], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9720.bindPopup('Rubrik GELBES BAND Eintrag 97/20<br><br>3 Apfelbäume<br><br>Telefon 00000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=20">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=20">zum Kontaktformular</a> ]');
+            var mkr9721 = L.marker([48.577061426916785, 9.364471435546877], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9721.bindPopup('Rubrik GELBES BAND Eintrag 97/21<br><br>4 Birnbäume und 3 Apfelbäume<br><br>Telefon 00000 000000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=21">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=21">zum Kontaktformular</a> ]');
+            var mkr9722 = L.marker([48.53888641203577, 9.389190673828127], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9722.bindPopup('Rubrik GELBES BAND Eintrag 97/22<br><br>mehrfere Obstbäume<br><br>Telefon 0000000 0000000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=22">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=22">zum Kontaktformular</a> ]');
+            var mkr9723 = L.marker([48.60067914322632, 9.33219909667969], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9723.bindPopup('Rubrik GELBES BAND Eintrag 97/23<br><br>4 Apfelbäume<br><br>Telefon 00000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=23">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=23">zum Kontaktformular</a> ]');
+            var mkr9725 = L.marker([48.7243968, 9.376194], { icon: grnIcon, opacity: 0.75, title: 'OBSTANNAHMESTELLE' }); mkr9725.bindPopup('Rubrik OBSTANNAHMESTELLE Eintrag 97/25<br><br><b>Streuobstmosterei Altbach</b><br />Esslinger Str. 27 | 73776 Altbach<br /><br /><br />Öffnungszeiten: Mo, Mi, Fr 16-19 Uhr<br />Lohnmosterei je nach Kapazitäten<br />Terminvereinbarung während der Öffnungszeiten notwendig!<br />Gepreßt wird Di, Do und Sa.<br><br>Telefon 07153 617294<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=25">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=25">zum Kontaktformular</a> ]');
+            var mkr9726 = L.marker([48.62723588059461, 9.387817382812502], { icon: grnIcon, opacity: 0.75, title: 'OBSTANNAHMESTELLE' }); mkr9726.bindPopup('Rubrik OBSTANNAHMESTELLE Eintrag 97/26<br><br><b>Müller Säfte</b><br />Hauptstr. 4 | 72660 Nürtingen<br /><br />Annahmezeiten MO, MI, FR 17-19 Uhr<br />Bag in Box<br><br>Telefon 07022 99999999<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=26">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=26">zum Kontaktformular</a> ]');
+            var mkr9727 = L.marker([48.57113397558333, 9.381433725357057], { icon: vltIcon, opacity: 0.75, title: 'HOFLADEN' }); mkr9727.bindPopup('Rubrik HOFLADEN Eintrag 97/27<br><br><b>Haldenhof</b><br />Seeweg 66 | 72660 Beuren-Balzholz<br /><br />Rund um die Uhr einkaufen, wer wünscht sich das nicht? Nicht nur wenn der Laden geöffnet ist, sondern wenn Sie möchten. Bei uns ist dies immer möglich! Unser Verkaufsraum auf dem Haldenhof ist stets geöffnet. Nach dem Selbstbedienungsprinzip, können Sie sich selbst Ihre Ware aus dem Regal nehmen, die Eier Ihrer Wahl einpacken oder unsere frische Rohmilch zapfen.<br /><br /><a class=&quot;mpText&quot; target=&quot;_blank&quot; href=&quot;http://www.haldenhof-beuren.de&quot;>Haldenhof</a><br><br>Telefon 07025/83321<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=27">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=27">zum Kontaktformular</a> ]');
+            var mkr9728 = L.marker([48.56774756276, 9.2861938476563], { icon: yelIcon, opacity: 0.75, title: 'GELBES BAND' }); mkr9728.bindPopup('Rubrik GELBES BAND Eintrag 97/28<br><br>1 Apfelbaum Brettacher<br><br>Telefon 00000000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=28">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=28">zum Kontaktformular</a> ]');
+            var mkr9733 = L.marker([48.55962492731954, 9.433736801147463], { icon: blkIcon, opacity: 0.75, title: 'FLÄCHE' }); mkr9733.bindPopup('Rubrik FLÄCHE Eintrag 97/33<br><br>Wiese mit 23 Bäumen zu verkaufen, 20 ar<br><br>Telefon 071234 5546<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=33">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=33">zum Kontaktformular</a> ]');
+            var mkr9734 = L.marker([48.56894028748692, 9.390392303466799], { icon: blkIcon, opacity: 0.75, title: 'FLÄCHE' }); mkr9734.bindPopup('Rubrik FLÄCHE Eintrag 97/34<br><br>Biete Wiese schön...<br><br>Telefon 000000<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=34">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=34">zum Kontaktformular</a> ]');
+            var mkr9710 = L.marker([48.6042558, 9.2553709], { icon: grnIcon, opacity: 0.75, title: 'OBSTANNAHMESTELLE' }); mkr9710.bindPopup('Rubrik OBSTANNAHMESTELLE Eintrag 97/10<br><br>Annahmezeiten ab 20.08.2022: Mo-Fr 9-12 Uhr und 14-18 Uhr, Sa 9-16 Uhr, Ankauf und Tausch gegen Fruchtsäfte<br><br>Telefon 07127 - 35839<br>[ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=detail&mp_Segment=97&mp_Seite=1&mp_Nummer=10">zum Inserat</a> ]   [ <a href="https://www.streuobstwiesen-boerse.de/marktplatz-bay/marktplatz.php?mp_Aktion=kontakt&mp_Segment=97&mp_Seite=1&mp_Nummer=10">zum Kontaktformular</a> ]');
+            const yelLGr = L.layerGroup([mkr9719, mkr9720, mkr9721, mkr9722, mkr9723, mkr9728]);
+            const blkLGr = L.layerGroup([mkr9733, mkr9734]);
+            const grnLGr = L.layerGroup([mkr9725, mkr9726, mkr9710]);
+            const vltLGr = L.layerGroup([mkr9727]);
+            layerControl.addOverlay(yelLGr, 'GELBES BAND');
+            layerControl.addOverlay(blkLGr, 'FLÄCHE');
+            layerControl.addOverlay(grnLGr, 'OBSTANNAHMESTELLE');
+            layerControl.addOverlay(vltLGr, 'HOFLADEN');
+            layerControl.addOverlay(landkreise, 'Landkreise');
 
 //#END_DATA#
     </script>
