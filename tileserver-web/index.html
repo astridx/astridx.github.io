@@ -2,81 +2,91 @@
 <html lang="de">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tileserver gauss.openstreetmap.de</title>
-  <script type="module" crossorigin src="/tileserver-web/assets/index-27ba66fb.js"></script>
-  <link rel="stylesheet" href="/tileserver-web/assets/index-9ecbbbdd.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Openstreetmap Tileserver Webpage</title>
+  
+  
+  <script type="module" crossorigin src="/tileserver-web/assets/index-1649670a.js"></script>
+  <link rel="stylesheet" href="/tileserver-web/assets/index-1b651ccf.css">
 <link rel="icon" type="image/x-icon" href="/tileserver-web/assets/favicon.ico"><link rel="icon" type="image/png" sizes="16x16" href="/tileserver-web/assets/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="/tileserver-web/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="48x48" href="/tileserver-web/assets/favicon-48x48.png"><link rel="manifest" href="/tileserver-web/assets/manifest.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="theme-color" content="#fff"><meta name="application-name"><link rel="apple-touch-icon" sizes="57x57" href="/tileserver-web/assets/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/tileserver-web/assets/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/tileserver-web/assets/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/tileserver-web/assets/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/tileserver-web/assets/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/tileserver-web/assets/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/tileserver-web/assets/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/tileserver-web/assets/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="167x167" href="/tileserver-web/assets/apple-touch-icon-167x167.png"><link rel="apple-touch-icon" sizes="180x180" href="/tileserver-web/assets/apple-touch-icon-180x180.png"><link rel="apple-touch-icon" sizes="1024x1024" href="/tileserver-web/assets/apple-touch-icon-1024x1024.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title"><link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-640x1136.png"><link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-1136x640.png"><link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-750x1334.png"><link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-1334x750.png"><link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-1125x2436.png"><link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-2436x1125.png"><link rel="apple-touch-startup-image" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-1170x2532.png"><link rel="apple-touch-startup-image" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-2532x1170.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-828x1792.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-1792x828.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-1242x2688.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-2688x1242.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-1242x2208.png"><link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-2208x1242.png"><link rel="apple-touch-startup-image" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-1284x2778.png"><link rel="apple-touch-startup-image" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-2778x1284.png"><link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-1536x2048.png"><link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-2048x1536.png"><link rel="apple-touch-startup-image" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-1620x2160.png"><link rel="apple-touch-startup-image" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-2160x1620.png"><link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-1668x2388.png"><link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-2388x1668.png"><link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-1668x2224.png"><link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-2224x1668.png"><link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/tileserver-web/assets/apple-touch-startup-image-2048x2732.png"><link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/tileserver-web/assets/apple-touch-startup-image-2732x2048.png"><meta name="msapplication-TileColor" content="#fff"><meta name="msapplication-TileImage" content="/tileserver-web/assets/mstile-144x144.png"><meta name="msapplication-config" content="/tileserver-web/assets/browserconfig.xml"><link rel="yandex-tableau-widget" href="/tileserver-web/assets/yandex-browser-manifest.json"></head>
 
 <body>
 
-    <header class="container py-4 px-3 mx-auto">
-        <img id="logo">
-        <h1 id="heading"></h1>
-    </header>
+  <header class="container py-4 px-3 mx-auto">
+    <img id="logo">
+    <h1 id="header-h1"></h1>
+  </header>
 
-    <nav class="container py-4 px-3 mx-auto">
-    </nav>
+  <nav class="container py-4 px-3 mx-auto">
+    <div id="nav-info">Auswahlmöglichkeiten</div>
+    <ul class="nav-list">
+      <li><a href="/index.html?server=gauss">Gauss de</a> | <a href="/index.html?server=gauss&folder=osmhrb">Gauss
+          sorbisch</a></li>
+      <li><a href="/index.html?server=humboldt">Humboldt de</a> | <a
+          href="/index.html?server=humboldt&folder=osmhrb">Humboldt sorbisch</a></li>
+      <li><a href="/index.html?server=tile">Tile de</a> | <a href="/index.html?server=tile&folder=osmhrb">Tile
+          sorbisch</a></li>
+    </ul>
+  </nav>
 
-    <main class="container py-4 px-3 mx-auto">
-        <div id="map" class="map" tabindex="0"></div>
-        <input id="swipe" type="range" style="width: 100%">
-        <div id="">Per Kontextmenü kann man die letzte Renderzeit einer Kachel abfragen und ein neues Rendering anfordern. Todo</div>
-    </main>
-
-    <aside class="container py-4 px-3 mx-auto" aria-labelledby="id3">
-        <h1 id="aside">Aside</h1>
-    </aside>
-
-    <footer class="container py-4 px-3 mx-auto">
-        <div class="d-flex justify-content-between">
-            <span id="footer-left"><a target=_blank href=https://www.fossgis.de><img
-                        src=https://openstreetmap.de/img/fossgis-logo.png height=34px alt=FOSSGIS></a>
-                <p>Der FOSSGIS e.V. betreibt diese Webseiten mit und für die Community.</p><a
-                    href=/community/#der-fossgis-ev>Mehr erfahren...</a>
-            </span>
-            <span id="footer-rechts"><a target=_blank href=https://weeklyosm.eu/de /><img
-                    src=https://openstreetmap.de/img/weeklyosm-logo.png height=34px alt=Wochennotiz></a>
-                <p>Jede Woche gibt es die Wochennotiz, sie fasst in kompakter Form alle Neuigkeiten zusammen.</p><a
-                    target=_blank href=https://weeklyosm.eu/de />Zur Wochennotiz...</a>
-            </span>
-        </div>
-        <div>
-            <a href=https://openstreetmap.de/impressum />Impressum</a> | <a
-                href=https://www.fossgis.de/datenschutzerklärung />Datenschutzerklärung</a>
-            <div class=footer-licence>Alle Kartenbilder auf dieser Seite sind auf OpenStreetMap-Daten basierend und
-                stehen unter der Lizenz<br>
-                <a href=https://creativecommons.org/licenses/by-sa/2.0 />Creative Commons Attribution Share Alike-Lizenz
-                2.0</a>.
-                <a href=https://openstreetmap.de/faq/#wie-ist-das-mit-der-lizenz>Mehr zur Lizenz...</a>
-            </div>
-            <small>https://github.com/giggls/tileserver-web</small>
-    </footer>
-
-
-
-
-
-
-    <div class="modal" id="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="modal-title-id" class="modal-title">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="modal-body-id">Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
-                </div>
-            </div>
-        </div>
+  <main class="container py-4 px-3 mx-auto">
+    <div id="main-info">
+      <p>Die Karte verfügt über eine Swipe-Steuerung, mit der man zwischen zwei verschiedenen Stilen wechseln kann. Die
+        linke Seite der Karte zeigt den Originalstil, während die rechte Seite den ausgewählten Stil anzeigt. Zusätzlich
+        zur Swipe-Steuerung verfügt die Karte über ein Kontextmenü, über das Informationen zu bestimmten
+        Kacheln abgefragt werden können. Wenn der Benutzer mit der rechten Maustaste auf eine Kachel auf der Karte
+        klickt, öffnet sich ein Kontextmenü. Über dieses Menü können weitere Informationen zu dieser Kachel abgerufen
+        werden.
+      </p>
     </div>
+    <div id="map" class="map" tabindex="0"></div>
+    <input id="swipe" type="range" style="width: 100%">
+    <div id="main-stil">Info zum Stil: https://wiki.openstreetmap.org/wiki/German_Style</div>
+    <div id="main-quellcode">Quellcode: http://github.com/giggls/openstreetmap-carto-de</div>
+    <div id="main-version">Aktive Version: https://github.com/giggls/osml10n</div>
+    <div id="zoomlevel"></div>
+  </main>
 
-    
+  <aside class="container py-4 px-3 mx-auto" aria-labelledby="aside-h1">
+    <h1 id="aside-h1"></h1>
+    <div id="adide-info"></div>
+  </aside>
+
+  <footer class="container py-4 px-3 mx-auto">
+    <div>
+      <a href=https://openstreetmap.de/impressum />Impressum</a> | <a
+        href=https://www.fossgis.de/datenschutzerklärung />Datenschutzerklärung</a>
+      <div class=footer-licence>Alle Kartenbilder auf dieser Seite sind auf OpenStreetMap-Daten basierend und
+        stehen unter der <a href=https://openstreetmap.de/faq/#wie-ist-das-mit-der-lizenz>Lizenz</a><br><a
+          href=https://creativecommons.org/licenses/by-sa/2.0 />Creative Commons Attribution Share Alike-Lizenz
+        2.0</a>.
+      </div>
+  </footer>
+
+
+
+
+
+
+  <div class="modal fade" id="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="modal-title-id" class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="modal-body-id-image">Modal body text goes here.</p>
+          <p id="modal-body-id-infotext">Modal body text goes here.</p>
+        </div>
+        <div id="modal-footer" class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
