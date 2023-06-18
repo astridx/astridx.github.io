@@ -16,12 +16,23 @@
 <body>
 
 
-
-<div id="map" style="width: 600px; height: 400px;"></div>
+<h1>Leaflet Offline Demo</h1>
+<p>Um Speicherplatz zu sparen, ist der maximale Zoom auf 12 begrenzt.</p>
+<table><tr>
+<td><div id="map" style="width: 600px; height: 400px;"></div>
+<td><div id="map2" style="width: 600px; height: 400px;"></div>
+</tr></table>	
 <script>
 	var southWest = L.latLng(47.3, 5.9);
     var northEast = L.latLng(54.9, 15.0);
     var germany = L.latLngBounds(southWest, northEast);	
+
+	var map2 = L.map('map2',
+	{
+		maxBoundsViscosity: 1.0,
+		maxBounds: germany,
+	}
+	).setView([50.505, 7.09], 10);
 
 	var map = L.map('map',
 	{
@@ -30,18 +41,15 @@
 	}
 	).setView([50.505, 7.09], 10);
 
-/*	var tiles = L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
-		maxZoom: 18,
-		minZoom: 0,
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	}).addTo(map);*/
-
 	var tiles = L.tileLayer('./offlinetiles/{z}/{x}/{y}.png', {
 		maxZoom: 12,
 		minZoom: 5,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
+	var tiles2 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map2);
 
 
 	map.on('zoomend', function() {
@@ -49,8 +57,37 @@
 		console.log(map.getBounds());
 	});	
 </script>
+<h2>Kacheln lokal ablegen</h2>
+<p>Geladen werden die Tiles lokal aus dem Verzeichnis <code>./offlinetiles/{z}/{x}/{y}.png</code> mit Hilfe des nachfolgenden Codes:</p>
+<pre>
+var southWest = L.latLng(47.3, 5.9);
+var northEast = L.latLng(54.9, 15.0);
+var germany = L.latLngBounds(southWest, northEast);	
+
+var map = L.map('map',
+{
+  maxBoundsViscosity: 1.0,
+  maxBounds: germany,
+}
+).setView([50.505, 7.09], 10);
+
+var tiles = L.tileLayer('./offlinetiles/{z}/{x}/{y}.png', {
+  maxZoom: 12,
+  minZoom: 5,
+  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+</pre>
 
 
+<h2>Eine Beispiel Kachel</h2>
+
+<img src="https://astridx.github.io/leafletofflinetest/offlinetiles/10/537/332.png"\>
+<p>Die Image-Datei befindet sich im Verzeichnis <a href="https://astridx.github.io/leafletofflinetest/offlinetiles/10/537/332.png">./offlinetiles/10/537/332.png</a>
+<p>Was bedeuten "{z}/{x}/{y}"? Antwort: <a href="https://blog.astrid-guenther.de/eine-erste-karte-leaflet/#wie-wei%C3%9F-leaflet-welche-der-vielen-kacheln-angezeigt-werden-sollen">Wie weiß Leaflet welche der vielen Kacheln angezeigt werden sollen</a>.
+
+<h2>Demo zum lokalen Testen</h2>
+<p>Wer sich nicht scheut, 1 GB herunterzuladen und zu entpacken, kann das Beispiel lokal testen:</p>
+<a href="https://github.com/astridx/astridx.github.io/releases/tag/0.0.1">Demo</a>
 
 </body>
 </html>
